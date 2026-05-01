@@ -1,6 +1,7 @@
-title: "NULLBINS's 학습 공간"
+title: "널빈's 학습 공간"
 email: "dhyunchoi@kyonggi.ac.kr"
 description: "Learning summary site built with GitHub Pages and Jekyll"
 url: "https://nullbins.github.io"
 
 markdown: kramdown
+highlighter: rouge

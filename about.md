@@ -2,6 +2,7 @@
 layout: default
 title: "About Me"
 permalink: /about/
+date: 2026-05-01
 ---
 
 ## 👋 안녕하세요!
