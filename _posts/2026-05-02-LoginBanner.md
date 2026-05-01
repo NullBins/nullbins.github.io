@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "리눅스 SSH 접속 시 보이는 배너 설정"
-date: 2026-05-01
+date: 2026-05-02
 categories: Linux
 ---
 
