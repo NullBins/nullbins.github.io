@@ -12,7 +12,9 @@ categories: Linux
 ```vim
 vim /etc/default/grub
 ```
+
 > ![IMAGE](/assets/images/Linux/image1.png)
+
 ```vim
 ip link show | grep "link/ether" > /etc/udev/rules.d/70.rules
 ```
@@ -22,6 +24,7 @@ ip link show | grep "link/ether" > /etc/udev/rules.d/70.rules
 ```vim
 vim /etc/udev/rules.d/70.rules
 ```
+
 > ![IMAGE](/assets/images/Linux/image2.png)
 
 <span class="text-red">※ ATTR{address} 부분은 어댑터 MAC주소, NAME은 설정할 어댑터 이름</span>
@@ -29,7 +32,9 @@ vim /etc/udev/rules.d/70.rules
 ```vim
 reboot
 ```
+
 ```vim
 ip link show
 ```
+
 > ![IMAGE](/assets/images/Linux/image3.png)

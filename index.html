@@ -7,6 +7,12 @@ title: "Home"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta property="og:title" content="{{ page.title | default: site.title }}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
+    <meta property="og:image" content="{{ site.url }}/assets/images/og-image.png">
+    <meta property="og:type" content="website">
     <title>{{ site.title }} - {{ page.title }}</title>
     <style>
         :root {
@@ -96,7 +102,7 @@ title: "Home"
         <section class="hero">
             <h1>학습내용 기록 공간</h1>
             <p>
-                이곳은 학습한 내용, 트러블슈팅, 그리고 일상의 지식들을 구조화하여 기록하는 <b>널빈(NULLBINS)의 개인 디지털 가든(Digital Garden)</b>입니다.<br>
+                이곳은 학습한 내용, 트러블슈팅, 그리고 일상의 지식들을 구조화하여 기록하는 <b>널빈(NULLBINS)의 개인 디지털 정원(Digital Garden)</b>입니다.<br>
             </p>
         </section>
 
@@ -118,7 +124,7 @@ title: "Home"
                 <ul class="doc-list">
                     {% for category in site.categories %}
                     <li>
-                        <a href="/category/{{ category[0] }}">{{ category[0] }}</a>
+                        <a href="/category/#{{ category[0] }}">{{ category[0] }}</a>
                         <span class="badge">{{ category[1].size }}건</span>
                     </li>
                     {% endfor %}
