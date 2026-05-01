@@ -2,18 +2,103 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ site.title }} - {{ page.title }}</title>
+    <style>
+        :root {
+            --primary-color: #2b6cb0;
+            --bg-color: #f8fafc;
+            --text-color: #334155;
+            --border-color: #e2e8f0;
+        }
+        body {
+            margin: 0; background-color: var(--bg-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", sans-serif;
+            color: var(--text-color); line-height: 1.7;
+        }
+        a { color: var(--primary-color); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        header {
+            background-color: white; border-bottom: 1px solid var(--border-color);
+            padding: 15px 40px; display: flex; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
+        }
+        header .logo a { font-size: 1.2rem; font-weight: 700; color: #0f172a; }
+        header nav a { margin-left: 20px; color: #64748b; font-weight: 500; }
+
+        .container {
+            max-width: 850px; margin: 40px auto;
+            background: white; padding: 50px 60px;
+            border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem; color: #94a3b8; margin-bottom: 20px;
+        }
+        .breadcrumb span { margin: 0 5px; }
+
+        .post-title { font-size: 2.2rem; font-weight: 800; color: #0f172a; margin: 0 0 15px 0; }
+        .post-meta { font-size: 0.95rem; color: #64748b; margin-bottom: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;}
+        .tag { background: #f1f5f9; padding: 4px 10px; border-radius: 20px; font-size: 0.85rem; margin-right: 8px;}
+
+        .content h2 { font-size: 1.5rem; color: #0f172a; margin-top: 40px; padding-bottom: 8px; border-bottom: 2px solid #f1f5f9; }
+        .content h3 { font-size: 1.2rem; color: #1e293b; margin-top: 30px; }
+        .content p { margin-bottom: 1.5rem; }
+        
+        .callout {
+            background-color: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 20px; border-radius: 0 8px 8px 0; margin: 30px 0;
+        }
+        .callout-title { font-weight: bold; color: #166534; margin-bottom: 5px; display: block; }
+        
+        blockquote {
+            margin: 0; padding: 15px 20px; background: #f8fafc;
+            border-left: 4px solid var(--primary-color); color: #475569;
+            font-style: italic;
+        }
+        footer {
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1><a href="/">{{ site.title }}</a></h1>
-        <p>{{ site.description }}</p>
+        <div class="logo"><a href="/">{{ site.title }}</a></div>
+        <nav>
+            <a href="/">홈</a>
+            <a href="/categories">분류</a>
+            <a href="/about">소개</a>
+        </nav>
     </header>
 
-    <main>
-        {{ content }}
-    </main>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">홈</a> <span>›</span> 
+            <a href="/categories">{{ page.categories[0] }}</a> <span>›</span> 
+            문서 읽기
+        </div>
 
+        <h1 class="post-title">{{ page.title }}</h1>
+        <div class="post-meta">
+            마지막 수정일: {{ page.date | date: "%Y년 %m월 %d일" }} <br>
+            <div style="margin-top: 10px;">
+                {% for tag in page.tags %}
+                    <span class="tag">#{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="content">
+            {{ content }}
+        </div>
+    </div>
     <footer>
         <p>Copyright 2026 NullBins. All rights reserved.</p>
     </footer>
