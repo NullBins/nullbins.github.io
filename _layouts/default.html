@@ -142,6 +142,7 @@
         <div class="content">
             {{ content }}
         </div>
+    {% unless page.hide_likes %}
         <div style="display: flex; justify-content: center; margin-top: 60px; margin-bottom: 20px;">
             <applause-button 
                 style="width: 58px; height: 58px;" 
@@ -150,6 +151,7 @@
                 url="{{ site.url }}{{ page.url }}">
             </applause-button>
         </div>
+    {% endunless %}
     </div>
     <footer>
         <p>Copyright 2026 NullBins. All rights reserved.</p>

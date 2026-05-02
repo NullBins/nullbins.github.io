@@ -13,13 +13,13 @@ categories: Linux
 vim /etc/ssh/sshd_config
 ```
 
-> ![IMAGE](/assets/images/Linux/image4.png)
+> ![IMAGE](/assets/images/Linux/image04.png)
 
 ```vim
 vim /etc/issue
 ```
 
-> ![IMAGE](/assets/images/Linux/image5.png)
+> ![IMAGE](/assets/images/Linux/image05.png)
 
 <span class="text-red">※ 원하는 배너 문구를 삽입</span>
 
@@ -30,4 +30,4 @@ systemctl restart sshd.service
 logout
 ```
 
-> ![IMAGE](/assets/images/Linux/image6.png)
+> ![IMAGE](/assets/images/Linux/image06.png)
