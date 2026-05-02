@@ -10,6 +10,8 @@
     <meta property="og:image" content="{{ site.url }}/assets/images/og-image.png">
     <meta property="og:type" content="website">
     <title>{{ site.title }} - {{ page.title }}</title>
+    <link rel="stylesheet" href="https://unpkg.com/applause-button/dist/applause-button.css"/>
+    <script src="https://unpkg.com/applause-button/dist/applause-button.js"></script>
     <style>
         :root {
             --primary-color: #3b82f6;
@@ -102,6 +104,13 @@
         .highlight .na { color: #79c0ff; }
         .highlight .err { color: #f0f6fc; background-color: #8e1519; }
     </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GL3JT4KBSB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GL3JT4KBSB');
+    </script>
 </head>
 <body>
     <header>
@@ -132,6 +141,14 @@
 
         <div class="content">
             {{ content }}
+        </div>
+        <div style="display: flex; justify-content: center; margin-top: 60px; margin-bottom: 20px;">
+            <applause-button 
+                style="width: 58px; height: 58px;" 
+                color="#3b82f6" 
+                multiclap="true"
+                url="{{ site.url }}{{ page.url }}">
+            </applause-button>
         </div>
     </div>
     <footer>
