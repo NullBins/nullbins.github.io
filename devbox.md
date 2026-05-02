@@ -1,4 +1,0 @@
----
-layout: toolbox
-permalink: /devbox/
----
