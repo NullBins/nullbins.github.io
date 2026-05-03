@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ site.title }} - {{ page.title }}</title>
+  <style>
+    :root {
+    --primary: #0066B3;
+    --primary-light: #e8f4fd;
+    --primary-dark: #004a82;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+    font-family: -apple-system, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    }
+
+    .app {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px 48px;
+    }
+
+    .header {
+    text-align: center;
+    margin-bottom: 28px;
+    }
+
+    .header__badge {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    padding: 4px 16px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    }
+
+    .header h1 { font-size: 2rem; color: var(--primary-dark); margin-bottom: 8px; }
+    .header__sub { color: var(--muted); }
+
+    .layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+    }
+
+    .panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    }
+
+    .panel--preview {
+    position: sticky;
+    top: 16px;
+    }
+
+    .preset-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    align-items: center;
+    }
+
+    .preset-label { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+
+    .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    }
+
+    .btn--sm { padding: 6px 14px; font-size: 0.82rem; }
+    .btn--primary { background: var(--primary); color: #fff; }
+    .btn--primary:hover { background: var(--primary-dark); }
+    .btn--ghost { background: #f1f5f9; color: var(--muted); }
+    .btn--ghost:hover { background: #e2e8f0; }
+    .btn-row { margin-top: 16px; }
+
+    .element {
+    padding: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    transition: border-color 0.3s;
+    }
+
+    .element:focus-within { border-color: var(--primary); }
+
+    .element__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+    }
+
+    .element__num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    }
+
+    .element__head h3 { font-size: 1rem; flex: 1; }
+
+    .element__status {
+    font-size: 0.75rem;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    }
+
+    .element__status--empty { background: #fee2e2; color: #991b1b; }
+    .element__status--filled { background: #d1fae5; color: #065f46; }
+
+    .element__hint {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+    }
+
+    textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    resize: vertical;
+    background: #fafbfc;
+    }
+
+    textarea:focus { outline: none; border-color: var(--primary); background: #fff; }
+
+    .preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    }
+
+    .preview-header h2 { font-size: 1.2rem; color: var(--primary-dark); }
+
+    .score-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    }
+
+    .score-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #fff;
+    background: #d1d5db;
+    transition: background 0.3s;
+    }
+
+    .score-label { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+
+    .quality-bar {
+    height: 8px;
+    background: #f1f5f9;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    }
+
+    .quality-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--danger), var(--warning), var(--success));
+    transition: width 0.4s ease;
+    }
+
+    .quality-checks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+    }
+
+    .check-chip {
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    }
+
+    .check-chip--pass { background: #d1fae5; color: #065f46; }
+    .check-chip--fail { background: #fee2e2; color: #991b1b; }
+
+    .preview-box {
+    padding: 16px;
+    background: #f8fafc;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 120px;
+    }
+
+    .preview-placeholder { color: var(--muted); font-style: italic; }
+
+    .preview-section {
+    margin-bottom: 8px;
+    }
+
+    .preview-label {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.82rem;
+    }
+
+    .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--primary-dark);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 100;
+    }
+
+    .toast--show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    }
+
+    .compare-section {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    }
+
+    .compare-section h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: var(--primary-dark);
+    }
+
+    .compare-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    }
+
+    .compare-box {
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    }
+
+    .compare-box .bad { color: var(--danger); }
+    .compare-box .good { color: var(--success); }
+
+    .footer {
+    text-align: center;
+    margin-top: 40px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    }
+
+    @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+    .panel--preview { position: static; }
+    .header h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header__badge">AI Prompt Engineering</div>
+      <h1>프롬프트 5요소 빌더</h1>
+      <p class="header__sub">5가지 핵심 요소를 채워 완성도 높은 프롬프트를 조립</p>
+    </header>
+
+    <div class="layout">
+      <!-- 입력 패널 -->
+      <section class="panel panel--input">
+        <div class="preset-bar">
+          <span class="preset-label">프리셋:</span>
+          <button class="btn btn--sm" onclick="loadPreset(0)">마케팅 글쓰기</button>
+          <button class="btn btn--sm" onclick="loadPreset(1)">코드 리뷰</button>
+          <button class="btn btn--sm" onclick="loadPreset(2)">학습 자료</button>
+          <button class="btn btn--sm" onclick="loadPreset(3)">이메일 작성</button>
+          <button class="btn btn--sm btn--ghost" onclick="clearAll()">초기화</button>
+        </div>
+
+        <div class="element" data-element="role">
+          <div class="element__head">
+            <span class="element__num">1</span>
+            <h3>역할 (Role)</h3>
+            <span class="element__status" id="status-role">미입력</span>
+          </div>
+          <p class="element__hint">AI에게 어떤 전문가의 관점으로 답하게 할지 정합니다.</p>
+          <textarea id="inp-role" rows="2" placeholder="예: 10년 경력의 디지털 마케팅 전문가" oninput="updatePreview()"></textarea>
+        </div>
+
+        <div class="element" data-element="context">
+          <div class="element__head">
+            <span class="element__num">2</span>
+            <h3>맥락 (Context)</h3>
+            <span class="element__status" id="status-context">미입력</span>
+          </div>
+          <p class="element__hint">배경 정보, 상황, 대상 독자 등을 설명합니다.</p>
+          <textarea id="inp-context" rows="2" placeholder="예: 20대 대학생을 대상으로 한 건강식품 브랜드 런칭" oninput="updatePreview()"></textarea>
+        </div>
+
+        <div class="element" data-element="instruction">
+          <div class="element__head">
+            <span class="element__num">3</span>
+            <h3>지시 (Instruction)</h3>
+            <span class="element__status" id="status-instruction">미입력</span>
+          </div>
+          <p class="element__hint">AI가 수행해야 할 구체적인 작업을 명시합니다.</p>
+          <textarea id="inp-instruction" rows="2" placeholder="예: 인스타그램 광고 문구를 3개 작성해주세요" oninput="updatePreview()"></textarea>
+        </div>
+
+        <div class="element" data-element="format">
+          <div class="element__head">
+            <span class="element__num">4</span>
+            <h3>출력 형식 (Format)</h3>
+            <span class="element__status" id="status-format">미입력</span>
+          </div>
+          <p class="element__hint">원하는 응답의 구조, 길이, 형태를 지정합니다.</p>
+          <textarea id="inp-format" rows="2" placeholder="예: 각 문구는 50자 이내, 해시태그 3개 포함" oninput="updatePreview()"></textarea>
+        </div>
+
+        <div class="element" data-element="constraints">
+          <div class="element__head">
+            <span class="element__num">5</span>
+            <h3>제약 조건 (Constraints)</h3>
+            <span class="element__status" id="status-constraints">미입력</span>
+          </div>
+          <p class="element__hint">하지 말아야 할 것, 꼭 포함할 것, 톤 등을 지정합니다.</p>
+          <textarea id="inp-constraints" rows="2" placeholder="예: 유머러스한 톤, 과장된 표현 금지, 이모지 사용" oninput="updatePreview()"></textarea>
+        </div>
+      </section>
+
+      <!-- 미리보기 패널 -->
+      <section class="panel panel--preview">
+        <div class="preview-header">
+          <h2>조립된 프롬프트</h2>
+          <div class="score-wrap">
+            <div class="score-circle" id="scoreCircle">
+              <span id="scoreNum">0</span>
+            </div>
+            <span class="score-label" id="scoreLabel">미입력</span>
+          </div>
+        </div>
+
+        <div class="quality-bar">
+          <div class="quality-fill" id="qualityFill" style="width:0%"></div>
+        </div>
+        <div class="quality-checks" id="qualityChecks"></div>
+
+        <div class="preview-box" id="previewBox">
+          <p class="preview-placeholder">왼쪽에서 요소를 채우면 여기에 프롬프트가 조립됩니다.</p>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn--primary" onclick="copyPrompt()">📋 클립보드에 복사</button>
+        </div>
+        <div id="copyToast" class="toast">복사 완료!</div>
+
+        <!-- Before/After 비교 -->
+        <div class="compare-section">
+          <h3>Before / After 비교</h3>
+          <div class="compare-toggle">
+            <button class="btn btn--sm" id="btnBefore" onclick="showCompare('before')">약한 프롬프트</button>
+            <button class="btn btn--sm btn--primary" id="btnAfter" onclick="showCompare('after')">강한 프롬프트</button>
+          </div>
+          <div id="compareBox" class="compare-box"></div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <p>{{ site.title }} - AI Prompt Engineering</p>
+    </footer>
+  </div>
+  <script>
+    const elements = ['role', 'context', 'instruction', 'format', 'constraints'];
+    const labels = {
+    role: '역할',
+    context: '맥락',
+    instruction: '지시',
+    format: '출력 형식',
+    constraints: '제약 조건'
+    };
+
+    const presets = [
+    {
+        name: '마케팅 글쓰기',
+        role: '10년 경력의 디지털 마케팅 전문가이자 카피라이터',
+        context: '20대 대학생을 타겟으로 한 건강 스무디 브랜드 "프레시빈"의 인스타그램 런칭 캠페인',
+        instruction: '인스타그램 광고 문구를 3개 작성해주세요. 각 문구에 어울리는 이모지도 추천해주세요.',
+        format: '각 문구는 50자 이내. 번호를 매겨 나열. 각 문구 아래에 추천 해시태그 3개 포함.',
+        constraints: '유머러스하고 친근한 톤. 과장된 건강 효능 주장 금지. "최고", "최강" 같은 과장 표현 사용하지 마세요.'
+    },
+    {
+        name: '코드 리뷰',
+        role: 'Python과 Django 전문 시니어 개발자. 코드 품질과 보안에 특히 관심이 많습니다.',
+        context: '주니어 개발자가 작성한 사용자 인증 API 코드를 리뷰하는 상황. 프로덕션 배포 전 최종 검토입니다.',
+        instruction: '아래 코드를 리뷰하고, 버그, 보안 취약점, 개선 사항을 찾아주세요.',
+        format: '## 심각도별 분류\n### 🔴 심각 (필수 수정)\n### 🟡 주의 (권장 수정)\n### 🟢 제안 (선택 개선)\n각 항목에 줄 번호, 문제 설명, 수정 코드를 포함하세요.',
+        constraints: '교육적이고 건설적인 톤을 유지하세요. 단순히 문제만 지적하지 말고 왜 문제인지, 어떻게 고치는지 설명해주세요.'
+    },
+    {
+        name: '학습 자료',
+        role: '컴퓨터 과학 교수. 복잡한 개념을 비유와 시각화로 쉽게 설명하는 것이 장기입니다.',
+        context: '프로그래밍을 처음 배우는 대학교 1학년 학생들을 위한 자료. 사전 지식이 거의 없다고 가정합니다.',
+        instruction: '"재귀 함수"의 개념을 설명하는 학습 자료를 작성해주세요.',
+        format: '## 핵심 개념 (1문단)\n## 일상 비유 (2-3개)\n## 코드 예시 (Python, 주석 포함)\n## 자주 하는 실수\n## 연습 문제 (2개)',
+        constraints: '전문 용어를 처음 사용할 때는 반드시 풀어서 설명하세요. 영어 용어는 한글 번역과 함께 표기하세요.'
+    },
+    {
+        name: '이메일 작성',
+        role: '비즈니스 커뮤니케이션 전문가. 명확하고 설득력 있는 이메일 작성이 전문 분야입니다.',
+        context: '프로젝트 마감일이 2주 늦어지게 되었고, 이를 클라이언트에게 알려야 하는 상황. 클라이언트와의 관계 유지가 중요합니다.',
+        instruction: '프로젝트 지연을 알리는 공식 이메일을 작성해주세요. 지연 사유와 대안을 포함해주세요.',
+        format: '제목: [제목]\n\n[이메일 본문]\n\n길이: 200-300자 이내',
+        constraints: '전문적이지만 따뜻한 톤. 변명이 아닌 해결책 중심. 구체적인 새 일정을 제시하세요. 과도한 사과는 피하세요.'
+    }
+    ];
+
+    function loadPreset(idx) {
+    const p = presets[idx];
+    document.getElementById('inp-role').value = p.role;
+    document.getElementById('inp-context').value = p.context;
+    document.getElementById('inp-instruction').value = p.instruction;
+    document.getElementById('inp-format').value = p.format;
+    document.getElementById('inp-constraints').value = p.constraints;
+    updatePreview();
+    }
+
+    function clearAll() {
+    elements.forEach(e => { document.getElementById('inp-' + e).value = ''; });
+    updatePreview();
+    }
+
+    function updatePreview() {
+    const values = {};
+    let filled = 0;
+    elements.forEach(e => {
+        const val = document.getElementById('inp-' + e).value.trim();
+        values[e] = val;
+        const statusEl = document.getElementById('status-' + e);
+        if (val) {
+        filled++;
+        statusEl.textContent = '입력됨';
+        statusEl.className = 'element__status element__status--filled';
+        } else {
+        statusEl.textContent = '미입력';
+        statusEl.className = 'element__status element__status--empty';
+        }
+    });
+
+    // Score
+    const score = Math.round((filled / 5) * 100);
+    const scoreEl = document.getElementById('scoreNum');
+    const circleEl = document.getElementById('scoreCircle');
+    const labelEl = document.getElementById('scoreLabel');
+    const fillEl = document.getElementById('qualityFill');
+
+    scoreEl.textContent = score;
+    fillEl.style.width = score + '%';
+
+    if (score === 0) {
+        circleEl.style.background = '#d1d5db';
+        labelEl.textContent = '미입력';
+    } else if (score <= 40) {
+        circleEl.style.background = '#ef4444';
+        labelEl.textContent = '부족';
+    } else if (score <= 60) {
+        circleEl.style.background = '#f59e0b';
+        labelEl.textContent = '보통';
+    } else if (score <= 80) {
+        circleEl.style.background = '#3b82f6';
+        labelEl.textContent = '좋음';
+    } else {
+        circleEl.style.background = '#10b981';
+        labelEl.textContent = '우수!';
+    }
+
+    // Quality checks
+    const checksEl = document.getElementById('qualityChecks');
+    checksEl.innerHTML = elements.map(e => {
+        const pass = !!values[e];
+        return `<span class="check-chip check-chip--${pass ? 'pass' : 'fail'}">${pass ? '✓' : '✗'} ${labels[e]}</span>`;
+    }).join('');
+
+    // Preview
+    const previewBox = document.getElementById('previewBox');
+    if (filled === 0) {
+        previewBox.innerHTML = '<p class="preview-placeholder">왼쪽에서 요소를 채우면 여기에 프롬프트가 조립됩니다.</p>';
+        return;
+    }
+
+    let prompt = '';
+    if (values.role) {
+        prompt += `[역할]\n${values.role}\n\n`;
+    }
+    if (values.context) {
+        prompt += `[맥락]\n${values.context}\n\n`;
+    }
+    if (values.instruction) {
+        prompt += `[지시]\n${values.instruction}\n\n`;
+    }
+    if (values.format) {
+        prompt += `[출력 형식]\n${values.format}\n\n`;
+    }
+    if (values.constraints) {
+        prompt += `[제약 조건]\n${values.constraints}`;
+    }
+
+    previewBox.innerHTML = prompt.split('\n').map(line => {
+        if (line.startsWith('[') && line.endsWith(']')) {
+        return `<span class="preview-label">${line}</span>`;
+        }
+        return line;
+    }).join('\n');
+    }
+
+    function getAssembledPrompt() {
+    const values = {};
+    elements.forEach(e => { values[e] = document.getElementById('inp-' + e).value.trim(); });
+
+    let parts = [];
+    if (values.role) parts.push(`당신은 ${values.role}입니다.`);
+    if (values.context) parts.push(`\n배경: ${values.context}`);
+    if (values.instruction) parts.push(`\n${values.instruction}`);
+    if (values.format) parts.push(`\n출력 형식:\n${values.format}`);
+    if (values.constraints) parts.push(`\n제약 조건:\n${values.constraints}`);
+
+    return parts.join('\n');
+    }
+
+    function copyPrompt() {
+    const text = getAssembledPrompt();
+    if (!text.trim()) return;
+    navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('copyToast');
+        toast.classList.add('toast--show');
+        setTimeout(() => toast.classList.remove('toast--show'), 2000);
+    });
+    }
+
+    /* Before/After 비교 */
+    const compareData = {
+    before: {
+        label: '약한 프롬프트',
+        text: '마케팅 글 써줘\n\n→ 이 프롬프트의 문제점:\n• 역할 없음 — 누구의 관점인지 불명확\n• 맥락 없음 — 어떤 제품? 어떤 대상?\n• 지시 모호 — "글"이 무엇인지 불명확\n• 형식 없음 — 길이, 구조 미지정\n• 제약 없음 — 톤, 스타일 미지정\n\n→ AI는 일반적이고 활용 불가능한 응답 생성'
+    },
+    after: {
+        label: '강한 프롬프트 (5요소 적용)',
+        text: '당신은 10년 경력의 디지털 마케팅 전문가이자 카피라이터입니다.\n\n배경: 20대 대학생을 타겟으로 한 건강 스무디 브랜드 "프레시빈"의 인스타그램 런칭 캠페인\n\n인스타그램 광고 문구를 3개 작성해주세요. 각 문구에 어울리는 이모지도 추천해주세요.\n\n출력 형식: 각 문구는 50자 이내. 번호를 매겨 나열. 각 문구 아래에 추천 해시태그 3개 포함.\n\n제약 조건: 유머러스하고 친근한 톤. 과장된 건강 효능 주장 금지.\n\n→ 5가지 요소가 모두 포함된 완성도 높은 프롬프트\n→ AI가 정확하고 활용 가능한 응답 생성'
+    }
+    };
+
+    function showCompare(type) {
+    const box = document.getElementById('compareBox');
+    const data = compareData[type];
+
+    document.getElementById('btnBefore').className = type === 'before' ? 'btn btn--sm btn--primary' : 'btn btn--sm';
+    document.getElementById('btnAfter').className = type === 'after' ? 'btn btn--sm btn--primary' : 'btn btn--sm';
+
+    const cssClass = type === 'before' ? 'bad' : 'good';
+    box.innerHTML = `<span class="${cssClass}">${data.text}</span>`;
+    }
+
+    /* 초기화 */
+    document.addEventListener('DOMContentLoaded', () => {
+    updatePreview();
+    showCompare('before');
+    });
+  </script>
+</body>
+</html>
