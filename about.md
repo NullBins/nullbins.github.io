@@ -2,11 +2,19 @@
 layout: default
 title: "About Me"
 permalink: /about/
-date: 2026-05-01
+date: 2026-05-09
 ---
 
-## 👋 안녕하세요!
-가슴 뛰는 일을 하고 싶은 CSE(컴퓨터공학과) 대학생 최동현입니다.
+<div style="display: flex; align-items: center; gap: 30px; flex-wrap: wrap; margin-top: 30px; margin-bottom: 50px;">
+  <img src="/assets/images/profile.jpeg" alt="profile" style="width: 170px; height: 170px; border-radius: 50%; object-fit: cover; border: 4px solid #3b82f6; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+  <div style="flex: 1; min-width: 250px;">
+        <h2 style="margin-top: 0; border: none; padding: 0;">👋 안녕하세요!</h2>
+        <p style="font-size: 1.15rem; line-height: 1.7;">
+            <u>가슴 뛰는 일</u>을 하고 싶은<br>
+            CSE(컴퓨터공학과) 대학생 <strong>최동현</strong>입니다.
+        </p>
+  </div>
+</div>
 
 ### 🎇 Experiences
 - [ *2025.06.* ] 제 **3회** AI-Powered 경기대학교 **AWS DeepRacer** League 우승🏆
