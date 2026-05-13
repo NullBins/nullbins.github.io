@@ -145,6 +145,58 @@
         .highlight .nt { color: #7ee787; }
         .highlight .na { color: #79c0ff; }
         .highlight .err { color: #f0f6fc; background-color: #8e1519; }
+        
+        .content p code, .content li code, .content h1 code, .content h2 code, .content h3 code, .content h4 code, .content table code {
+            background-color: #334155;
+            color: #e2e8f0;
+            padding: 3px 6px;
+            border-radius: 6px;
+            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+            font-size: 0.85em;
+        }
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            display: block;
+        }
+        .content th, .content td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+        }
+        .content th {
+            background-color: #1e293b;
+            color: #f8fafc;
+            font-weight: bold;
+        }
+        .content tr:nth-child(even) {
+            background-color: #0f172a;
+        }
+        .content hr {
+            border: none;
+            border-top: 1px dashed #475569;
+            margin: 50px 0;
+        }
+        .content ul, .content ol {
+            padding-left: 25px;
+            margin-bottom: 25px;
+        }
+        .content li {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        .content li > p { margin-top: 5px; margin-bottom: 5px; }
+        .content img + em {
+            display: block;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-top: -15px;
+            margin-bottom: 30px;
+        }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GL3JT4KBSB"></script>
     <script>

@@ -7,8 +7,6 @@ categories: Linux
 
 ## Linux Commands (Helpful with hacking)
 
-<span class="text-red">※ 절대 허용되지 않은 사이트나 서버에 해킹 및 공격은 범죄이므로 이점 명심해야 한다.</span>
-
 ### *1. Find Command*
 
 #### HOST (Linux)
