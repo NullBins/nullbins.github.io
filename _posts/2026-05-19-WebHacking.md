@@ -33,7 +33,7 @@ categories: Hacking
 - Session: 클라이언트 인증 정보를 변조할 수 없게 하기 위해 인증 정보(auth info)를 서버에 저장, `해당 데이터를 접근할 수 있는 키(랜덤한 문자열)`를 클라이언트에게 전달하는 방식. 해당 키를 일반적으로 `Session ID`라고 한다.
     - Cookie Example: `나 육군 참모총장인데 들여보내줘.` <-`(암구호)`-> `충성! 참모총장님 들어가십시오.`
     - Session Example: `나 아까 그 참모총장인데 들여보내줘.` -> `죄송하지만 피아식별 띠(Session ID)가 없으므로 출입이 불가능 하십니다.`
->```javascript
+>```html
 ><script>
 >document.cookie = "key=value";
 ></script>
@@ -45,13 +45,13 @@ categories: Hacking
 >crossNewWindow = window.open('https://kknock.org');
 >console.log(crossNewWindow.location.href);
 >```
-> ![IMAGE](../assets/images/Web/image01.png)
+> ![IMAGE](/assets/images/Web/image01.png)
 - 하지만 밑의 명령어 처럼 데이터를 쓰는것은 문제없이 동작한다.
 >```javascript
 >crossNewWindow = window.open('https://kknock.org');
 >crossNewWindow.location.href = "https://dreamhack.io";
 >```
-> ![IMAGE](../assets/images/Web/image02.png)
+> ![IMAGE](/assets/images/Web/image02.png)
 - 사이트의 호스트가 달라 SOP때문에 정보를 교환하지 못할때 이러한 Cross Origin 정책을 완화시켜주는 방식은 `CORS(Cross Origin Resource Sharing)`이다.
 
 ---
@@ -144,7 +144,7 @@ categories: Hacking
         >```sql
         >SELECT * FROM users WHERE username='admin' AND substr(password, 1, 1) = "p" --' AND password='$password';
         >```
-        > ![IMAGE](../assets/images/Web/image03.png)
+        > ![IMAGE](/assets/images/Web/image03.png)
     - 파이썬 requests 모듈
         ```text
         pip install requests
@@ -244,8 +244,8 @@ categories: Hacking
 docker network create -d macvlan --subnet 192.168.10.0/24 --gateway 192.168.10.2 -o parent=ens32 docker-network
 docker compose up -d --build
 ```
-> ![IMAGE](../assets/images/Web/image04.png)
-> ![IMAGE](../assets/images/Web/image05.png)
+> ![IMAGE](/assets/images/Web/image04.png)
+> ![IMAGE](/assets/images/Web/image05.png)
 
 ## File Vulnerability
 - **File 업로드 취약점**: 악성 확장자를 갖는 파일을 업로드 하는 행위 (Webshell 등)
