@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Web Hacking (Server-Side) 학습 정리"
+description: "Blind SQL Injection과 이진 탐색·비트 연산 등 서버 사이드 웹 해킹에서 사용하는 데이터 추출 기법을 정리"
 date: 2026-05-28
 categories: Hacking
 ---
@@ -13,7 +14,7 @@ categories: Hacking
 >```sql
 >SELECT * FROM users WHERE username = 'admin' AND ascii(substr(password, 1, 1)) > 79;
 >```
-> ![IMG](/assets/images/Web/image06.png)
+> ![Blind SQL Injection 이진 탐색 조건 비교 예시](/assets/images/Web/image06.png)
 
 #### Bit 연산
 - ASCII는 0부터 127 범위의 문자를 표현할 수 있으며, 이는 곧 7개의 비트를 통해 하나의 문자로 나타낼 수 있는것을 의미 함. (0000000 ~ 1111111)
@@ -22,7 +23,7 @@ categories: Hacking
 >SELECT password FROM users WHERE username = 'admin' AND substr(bin(ord(password)), 1, 1)
 >SELECT password FROM users WHERE username = 'admin' AND substr(bin(ord(password)), 2, 1)
 >```
-> ![IMG](/assets/images/Web/image07.png)
+> ![Blind SQL Injection 비트 연산 데이터 추출 예시](/assets/images/Web/image07.png)
 
 <span class="text-red">※ 이진 탐색 : 이미 정렬된 리스트에서 임의의 값을 효율적으로 찾기 위한 알고리즘 (Blind SQL Injection에서 데이터 추출해 내는데 사용할 수 있음)</span>
 

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Dream Beginners 학습 정리"
+description: "Dreamhack 입문 학습을 바탕으로 웹 해킹, 시스템 해킹, 리버싱, 암호학, 포렌식, 리눅스와 Docker 기초를 정리"
 date: 2026-05-13
 categories: Hacking
 ---
@@ -97,6 +98,6 @@ apt install ./dive_0.13.1_linux_amd64.deb
 >```vim
 >dive dreamhackofficial/blue-whale:1
 >```
-> ![IMAGE](/assets/images/Linux/image32.png)
+> ![Docker Dive로 컨테이너 이미지 레이어를 분석한 화면](/assets/images/Linux/image32.png)
 
 ---

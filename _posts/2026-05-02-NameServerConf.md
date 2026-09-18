@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Debian 리눅스 DNS(BIND9) 서버 구축"
+description: "Debian BIND9에서 정방향·역방향 DNS 존, Master/Slave 구성, 내부·외부 View 설정을 구축하는 방법을 정리"
 date: 2026-05-02
 categories: Linux
 ---
@@ -21,7 +22,7 @@ apt install -y bind9
 vim /etc/bind/named.conf
 ```
 
-> ![IMAGE](/assets/images/Linux/image13.png)
+> ![BIND9 named.conf 정방향 DNS 존 설정](/assets/images/Linux/image13.png)
 
 ```vim
 cp /var/cache/bind/db.0 /var/cache/bind/skills.zone
@@ -30,7 +31,7 @@ cp /var/cache/bind/db.0 /var/cache/bind/skills.zone
 vim /var/cache/bind/skills.zone
 ```
 
-> ![IMAGE](/assets/images/Linux/image14.png)
+> ![BIND9 정방향 zone 파일 설정 예시](/assets/images/Linux/image14.png)
 
 ```vim
 chown bind:bind -R /var/cache/bind/
@@ -40,7 +41,7 @@ named-checkconf /etc/bind/named.conf
 named-checkzone skills.org /var/cache/bind/skills.zone
 ```
 
-> ![IMAGE](/assets/images/Linux/image15.png)
+> ![named-checkconf와 named-checkzone DNS 설정 검증 결과](/assets/images/Linux/image15.png)
 
 <span class="text-red">※ 위와 같이 OK 가 출력이 돼야 한다</span>
 
@@ -62,7 +63,7 @@ apt install -y bind9
 vim /etc/bind/named.conf
 ```
 
-> ![IMAGE](/assets/images/Linux/image16.png)
+> ![BIND9 named.conf 역방향 DNS 존 설정](/assets/images/Linux/image16.png)
 
 ```vim
 cp /var/cache/bind/db.127 /var/cache/bind/192.rev
@@ -71,7 +72,7 @@ cp /var/cache/bind/db.127 /var/cache/bind/192.rev
 vim /var/cache/bind/192.rev
 ```
 
-> ![IMAGE](/assets/images/Linux/image17.png)
+> ![BIND9 역방향 zone 파일 설정 예시](/assets/images/Linux/image17.png)
 
 ```vim
 chown bind:bind -R /var/cache/bind/
@@ -97,7 +98,7 @@ apt install -y bind9
 vim /etc/bind/named.conf
 ```
 
-> ![IMAGE](/assets/images/Linux/image18.png)
+> ![BIND9 Master DNS 서버의 zone transfer 설정](/assets/images/Linux/image18.png)
 
 <span class="text-red">※ Slave DNS 서버로 사용할 서버 IP 주소를 적는다</span>
 
@@ -108,7 +109,7 @@ cp /var/cache/bind/db.0 /var/cache/bind/skills.zone
 vim /var/cache/bind/skills.zone
 ```
 
-> ![IMAGE](/assets/images/Linux/image19.png)
+> ![Master DNS zone 파일의 Slave 서버 관련 설정](/assets/images/Linux/image19.png)
 
 ```vim
 chown bind:bind -R /var/cache/bind/
@@ -130,7 +131,7 @@ apt install -y bind9
 vim /etc/bind/named.conf
 ```
 
-> ![IMAGE](/assets/images/Linux/image20.png)
+> ![BIND9 Slave DNS 서버의 master 지정 설정](/assets/images/Linux/image20.png)
 
 <span class="text-red">※ Master DNS 서버 IP 주소를 적는다</span>
 
@@ -143,7 +144,7 @@ chown bind:bind -R /var/cache/bind/
 ls -l /var/cache/bind/skills.zone
 ```
 
-> ![IMAGE](/assets/images/Linux/image21.png)
+> ![Slave DNS 서버로 전송된 zone 파일 확인 결과](/assets/images/Linux/image21.png)
 
 <span class="text-red">※ 위와 같이 zone 파일을 받아와야 한다</span>
 
@@ -163,7 +164,7 @@ apt install -y bind9
 vim /etc/bind/named.conf
 ```
 
-> ![IMAGE](/assets/images/Linux/image22.png)
+> ![BIND9 내부·외부 네트워크 View 설정](/assets/images/Linux/image22.png)
 
 <span class="text-red">※ 외부 네트워크와 내부 네트워크에 허용할 네트워크를 입력하면 된다</span>
 

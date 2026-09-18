@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "알아두면 좋은 리눅스 명령어 정리"
+description: "보안 실습과 리눅스 운영에서 자주 사용하는 find, stat, sort, uniq, strings, tr, diff 명령어와 주요 옵션을 정리"
 date: 2026-05-04
 categories: Linux
 ---
@@ -35,9 +36,9 @@ categories: Linux
         ```
     - ```\;```: 개별 실행모드 (cat file1; cat file2)
     - ```+```: 일괄 실행모드 (cat file1 file2)
-    > ![IMAGE](/assets/images/Linux/image23.png)
+    > ![find 명령어 -exec 실행 예시](/assets/images/Linux/image23.png)
 - ```-ok```: exec와 같지만, 명령어 실행 여부를 물어본다 (y/n)
-    > ![IMAGE](/assets/images/Linux/image24.png)
+    > ![find 명령어 -ok 실행 확인 예시](/assets/images/Linux/image24.png)
 - ```-execdir```: 안전한 디렉터리 모드 (현재 위치가 아닌 찾은 파일이 있는 디렉터리로 이동하여 명령어 실행하게 됨)
 - ```-okdir```: ```-ok```와 ```-execdir```를 합친 명령어이다
 - ```-size```: 파일의 크기(용량)을 기준으로 파일을 찾아라.
@@ -94,7 +95,7 @@ categories: Linux
 
 - ```-r```: 정렬을 역순으로 해라
 - ```-u```: 중복된 값을 제거해라
-> ![IMAGE](/assets/images/Linux/image25.png)
+> ![리눅스 sort 명령어 정렬 결과](/assets/images/Linux/image25.png)
 
 ---
 
@@ -109,7 +110,7 @@ categories: Linux
 - ```-c```: 중복된 횟수 세기
 - ```-d```: 중복된 문자열만 보기 (Duplicate)
 - ```-u```: 중복되지 않은 문자열만 보기 (Unique)
-> ![IMAGE](/assets/images/Linux/image26.png)
+> ![리눅스 uniq 명령어 중복 처리 결과](/assets/images/Linux/image26.png)
 
 ---
 
@@ -123,7 +124,7 @@ categories: Linux
 
 - ```-n```: 몇 글자 이상인 문자열만 출력
 - ```-t x```: 글자가 숨겨진 위치(문자열이 들어가있는 주소) 찾기
-> ![IMAGE](/assets/images/Linux/image27.png)
+> ![리눅스 strings 명령어 문자열 검색 결과](/assets/images/Linux/image27.png)
 
 ---
 
@@ -139,7 +140,7 @@ categories: Linux
 ```bash
 echo "Hello" | tr "A-Za-z" "N-ZA-Mn-za-m" # ROT13 암호화 및 복호화 명령어
 ```
-> ![IMAGE](/assets/images/Linux/image28.png)
+> ![리눅스 tr 명령어 ROT13 변환 결과](/assets/images/Linux/image28.png)
 
 ---
 
@@ -153,4 +154,4 @@ echo "Hello" | tr "A-Za-z" "N-ZA-Mn-za-m" # ROT13 암호화 및 복호화 명령
 
 - ```diff```: 텍스트 파일을 한 줄씩 확인하여 어느 부분이 다르고, 무엇이 추가/삭제 되었는지 확인하는 명령어
 - ```-U 0```: 수정된 핵심 내용만 출력
-> ![IMAGE](/assets/images/Linux/image29.png)
+> ![리눅스 diff 명령어 파일 비교 결과](/assets/images/Linux/image29.png)

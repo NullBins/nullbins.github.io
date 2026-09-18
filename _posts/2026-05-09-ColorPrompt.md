@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "리눅스 프롬프트 색상 설정"
+description: "리눅스 Bash 프롬프트의 PS1 색상 코드를 설정해 콘솔과 터미널 프롬프트 색상을 변경하는 방법을 정리"
 date: 2026-05-09
 categories: Linux
 ---
@@ -28,9 +29,9 @@ vim ~/.bashrc
 ```
 
 #### Linux Console Image
-> ![IMAGE](/assets/images/Linux/image30.png)
+> ![리눅스 콘솔에 적용한 컬러 Bash 프롬프트](/assets/images/Linux/image30.png)
 
 #### Linux Terminal Image
-> ![IMAGE](/assets/images/Linux/image31.png)
+> ![리눅스 터미널에 적용한 컬러 Bash 프롬프트](/assets/images/Linux/image31.png)
 
 ---

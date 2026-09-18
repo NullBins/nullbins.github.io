@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Debian 리눅스 IP 주소 설정 및 라우팅"
+description: "Debian 리눅스에서 IPv4·IPv6 정적/DHCP 주소, DNS nameserver, 정적 라우팅을 설정하는 방법을 정리"
 date: 2026-05-02
 categories: Linux
 ---
@@ -33,7 +34,7 @@ route add default gw 192.168.0.254
 vim /etc/network/interfaces
 ```
 
-> ![IMAGE](/assets/images/Linux/image07.png)
+> ![Debian interfaces 파일의 IPv4 정적 IP 설정 예시](/assets/images/Linux/image07.png)
 
 <span class="text-red">※ ens33은 인터페이스이고, netmask, network, broadcast 들은 굳이 쓰지 않아도 된다</span>
 
@@ -49,7 +50,7 @@ systemctl restart networking
 vim /etc/network/interfaces
 ```
 
-> ![IMAGE](/assets/images/Linux/image08.png)
+> ![Debian interfaces 파일의 IPv4 DHCP 설정 예시](/assets/images/Linux/image08.png)
 
 ```vim
 systemctl restart networking
@@ -63,7 +64,7 @@ systemctl restart networking
 vim /etc/network/interfaces
 ```
 
-> ![IMAGE](/assets/images/Linux/image09.png)
+> ![Debian interfaces 파일의 IPv6 정적 IP 설정 예시](/assets/images/Linux/image09.png)
 
 ```vim
 systemctl restart networking
@@ -77,7 +78,7 @@ systemctl restart networking
 vim /etc/network/interfaces
 ```
 
-> ![IMAGE](/assets/images/Linux/image10.png)
+> ![Debian interfaces 파일의 IPv6 DHCP 설정 예시](/assets/images/Linux/image10.png)
 
 ```vim
 systemctl restart networking
@@ -91,7 +92,7 @@ systemctl restart networking
 vim /etc/resolv.conf
 ```
 
-> ![IMAGE](/assets/images/Linux/image11.png)
+> ![resolv.conf의 DNS nameserver 설정 예시](/assets/images/Linux/image11.png)
 
 <span class="text-red">※ nameserver 2개인 이유는 보조 DNS 서버, search는 resolving 할때 도메인을 제외하기 위함 (IPv6도 똑같이 설정)</span>
 
@@ -143,7 +144,7 @@ ip -6 route add 2001:AAAA::/64 via 2001:ABCD::FFFF dev ens33
 vim /etc/network/interfaces
 ```
 
-> ![IMAGE](/assets/images/Linux/image12.png)
+> ![Debian interfaces 파일의 IPv6 정적 라우팅 설정 예시](/assets/images/Linux/image12.png)
 
 <span class="text-red">※ via는 넥스트 홉 라우터 IP 주소, dev는 인터페이스 이름</span>
 

@@ -3,201 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <meta property="og:title" content="{{ page.title | default: site.title }}">
-    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-    <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
-    <meta property="og:image" content="{{ site.url }}/assets/images/og-image.png">
-    <meta property="og:type" content="website">
-    <title>{{ site.title }} - {{ page.title }}</title>
+    <link rel="icon" type="image/png" href="{{ '/favicon.png' | relative_url }}">
+    {% include seo.html %}
     <link rel="stylesheet" href="https://unpkg.com/applause-button/dist/applause-button.css"/>
     <script src="https://unpkg.com/applause-button/dist/applause-button.js"></script>
-    <style>
-        :root {
-            --primary-color: #3b82f6;
-            --bg-color: #0f172a;
-            --text-color: #cbd5e1;
-            --border-color: #334155;
-        }
-        body {
-            margin: 0; background-color: var(--bg-color);
-            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", sans-serif;
-            color: var(--text-color); line-height: 1.7;
-        }
-        a { color: var(--primary-color); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-
-        header {
-            background-color: #1e293b; border-bottom: 1px solid var(--border-color);
-            padding: 15px 40px; display: flex; justify-content: space-between;
-            position: sticky; top: 0; z-index: 100;
-        }
-        header .logo a { font-size: 1.2rem; font-weight: 700; color: #f8fafc; }
-        header nav a { margin-left: 20px; color: #94a3b8; font-weight: 500; }
-        header nav a:hover { color: var(--primary-color); }
-
-        .container {
-            max-width: 850px; margin: 40px auto;
-            background: #1e293b; padding: 50px 60px;
-            border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            border: 1px solid var(--border-color);
-        }
-
-        .breadcrumb {
-            font-size: 0.9rem; color: #64748b; margin-bottom: 20px;
-        }
-        .breadcrumb span { margin: 0 5px; }
-
-        .post-title { font-size: 2.2rem; font-weight: 800; color: #f8fafc; margin: 0 0 15px 0; }
-        .post-meta { font-size: 0.95rem; color: #94a3b8; margin-bottom: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;}
-        .tag { background: #334155; padding: 4px 10px; border-radius: 20px; font-size: 0.85rem; margin-right: 8px; color: #e2e8f0;}
-
-        .content h2 { font-size: 1.5rem; color: #f8fafc; margin-top: 40px; padding-bottom: 8px; border-bottom: 2px solid var(--border-color); }
-        .content h3 { font-size: 1.2rem; color: #e2e8f0; margin-top: 30px; }
-        .content p { margin-bottom: 1.5rem; }
-        .content img { max-width: 100%; height: auto; display: block; }
-
-        .callout {
-            background-color: #064e3b;
-            border-left: 4px solid #4ade80;
-            padding: 20px; border-radius: 0 8px 8px 0; margin: 30px 0;
-            color: #d1fae5;
-        }
-        .callout-title { font-weight: bold; color: #4ade80; margin-bottom: 5px; display: block; }
-
-        blockquote {
-            margin: 0; padding: 15px 20px; background: #0f172a;
-            border-left: 4px solid var(--primary-color); color: #94a3b8;
-            font-style: italic;
-        }
-
-        footer {
-            margin-top: 50px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-            padding-bottom: 30px;
-            text-align: center;
-            color: #64748b;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                align-items: center;
-                padding: 15px 20px;
-                gap: 15px;
-            }
-            header nav {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-            header nav a {
-                margin: 0;
-                font-size: 0.95rem;
-            }
-
-            .container {
-                margin: 20px 15px;
-                padding: 30px 20px;
-            }
-
-            .post-title {
-                font-size: 1.7rem;
-            }
-            .content h2 {
-                font-size: 1.3rem;
-            }
-
-            .highlight {
-                padding: 12px;
-                font-size: 80%;
-                border-radius: 4px;
-            }
-            
-            .callout {
-                padding: 15px;
-            }
-        }
-
-        .text-red { color: #ef4444 !important; }
-
-        .highlight {
-            background: #0d1117;
-            border-radius: 6px;
-            padding: 16px;
-            overflow: auto;
-            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
-            font-size: 85%;
-            line-height: 1.45;
-            border: 1px solid #30363d;
-        }
-        .highlight pre { margin: 0; color: #c9d1d9; }
-        .highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf { color: #8b949e; font-style: italic; }
-        .highlight .k, .highlight .kv { color: #ff7b72; font-weight: bold; }
-        .highlight .n { color: #c9d1d9; }
-        .highlight .s, .highlight .sa, .highlight .dl, .highlight .s2, .highlight .s1 { color: #a5d6ff; }
-        .highlight .m, .highlight .mb, .highlight .mx, .highlight .mi, .highlight .mf { color: #79c0ff; }
-        .highlight .nb, .highlight .nc, .highlight .nf, .highlight .fm { color: #d2a8ff; font-weight: bold; }
-        .highlight .o, .highlight .ow { color: #79c0ff; font-weight: bold; }
-        .highlight .nt { color: #7ee787; }
-        .highlight .na { color: #79c0ff; }
-        .highlight .err { color: #f0f6fc; background-color: #8e1519; }
-        
-        .content :not(pre) > code {
-            background-color: #334155; 
-            color: #e2e8f0;            
-            padding: 3px 6px;          
-            border-radius: 6px;        
-            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
-            font-size: 0.85em;         
-        }
-        .content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
-            font-size: 0.95rem;
-            overflow-x: auto;
-            display: block;
-        }
-        .content th, .content td {
-            border: 1px solid var(--border-color);
-            padding: 12px 15px;
-            text-align: left;
-        }
-        .content th {
-            background-color: #1e293b;
-            color: #f8fafc;
-            font-weight: bold;
-        }
-        .content tr:nth-child(even) {
-            background-color: #0f172a;
-        }
-        .content hr {
-            border: none;
-            border-top: 1px dashed #475569;
-            margin: 50px 0;
-        }
-        .content ul, .content ol {
-            padding-left: 25px;
-            margin-bottom: 25px;
-        }
-        .content li {
-            margin-bottom: 10px;
-            line-height: 1.8;
-        }
-        .content li > p { margin-top: 5px; margin-bottom: 5px; }
-        .content img + em {
-            display: block;
-            text-align: center;
-            color: #94a3b8;
-            font-size: 0.85rem;
-            margin-top: -15px;
-            margin-bottom: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GL3JT4KBSB"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -206,36 +17,16 @@
         gtag('config', 'G-GL3JT4KBSB');
     </script>
 </head>
-<body>
-    <header>
-        <div class="logo"><a href="/">{{ site.title }}</a></div>
-        <nav style="display: flex; align-items: center; flex-wrap: nowrap; gap: 15px;">
-            <a href="/">HOME</a>
-            <a href="/categories">CATEGORY</a>
-            <a href="/about">ABOUT</a>
-            <a href="https://github.com/NullBins" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center;" title="Github">
-                <svg height="22" width="22" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-                </svg>
-            </a>
-        </nav>
-    </header>
+<body id="top" class="document-page{% if page.url contains "/about" %} about-page{% endif %}">
+    <a class="skip-link" href="#main">본문으로 이동</a>
+    {% include header.html %}
 
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="/">홈</a> <span>›</span>
-            <a href="/categories">{{ page.categories[0] }}</a> <span>›</span>
-            문서 읽기
-        </div>
-
+    <main id="main" class="container document">
+        <nav class="breadcrumb" aria-label="현재 위치"><a href="/">home</a><span>/</span>{% if page.categories.size > 0 %}<a href="/categories/#{{ page.categories[0] | uri_escape }}">{{ page.categories[0] }}</a><span>/</span>{% endif %}<span>{{ page.title }}</span></nav>
         <h1 class="post-title">{{ page.title }}</h1>
         <div class="post-meta">
-            마지막 수정일: {{ page.date | date: "%Y년 %m월 %d일" }} <br>
-            <div style="margin-top: 10px;">
-                {% for tag in page.tags %}
-                    <span class="tag">#{{ tag }}</span>
-                {% endfor %}
-            </div>
+            {% if page.date %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>{% endif %}
+            {% for tag in page.tags %}<span class="tag">#{{ tag }}</span>{% endfor %}
         </div>
 
         <div class="content">
@@ -243,17 +34,15 @@
         </div>
     {% unless page.hide_likes %}
         <div style="display: flex; justify-content: center; margin-top: 60px; margin-bottom: 20px;">
-            <applause-button 
-                style="width: 58px; height: 58px;" 
-                color="#3b82f6" 
+            <applause-button
+                style="width: 58px; height: 58px;"
+                color="#54665a"
                 multiclap="true"
-                url="{{ site.url }}{{ page.url }}">
+                url="{{ page.url | absolute_url }}">
             </applause-button>
         </div>
     {% endunless %}
-    </div>
-    <footer>
-        <p>Copyright 2026 NullBins. All rights reserved.</p>
-    </footer>
+    </main>
+    {% include footer.html %}
 </body>
 </html>

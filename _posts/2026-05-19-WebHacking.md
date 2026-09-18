@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Web Hacking 학습 정리"
+description: "웹 보안 기초부터 Cookie·Session, SOP/CORS, XSS, CSRF, SQL Injection, Command Injection 등 주요 웹 취약점을 정리"
 date: 2026-05-19
 categories: Hacking
 ---
@@ -45,13 +46,13 @@ categories: Hacking
 >crossNewWindow = window.open('https://kknock.org');
 >console.log(crossNewWindow.location.href);
 >```
-> ![IMAGE](/assets/images/Web/image01.png)
+> ![Same Origin Policy로 다른 Origin의 location 정보 접근이 제한된 예시](/assets/images/Web/image01.png)
 - 하지만 밑의 명령어 처럼 데이터를 쓰는것은 문제없이 동작한다.
 >```javascript
 >crossNewWindow = window.open('https://kknock.org');
 >crossNewWindow.location.href = "https://dreamhack.io";
 >```
-> ![IMAGE](/assets/images/Web/image02.png)
+> ![다른 Origin 창의 location 변경이 허용되는 동작 예시](/assets/images/Web/image02.png)
 - 사이트의 호스트가 달라 SOP때문에 정보를 교환하지 못할때 이러한 Cross Origin 정책을 완화시켜주는 방식은 `CORS(Cross Origin Resource Sharing)`이다.
 
 ---
@@ -144,7 +145,7 @@ categories: Hacking
         >```sql
         >SELECT * FROM users WHERE username='admin' AND substr(password, 1, 1) = "p" --' AND password='$password';
         >```
-        > ![IMAGE](/assets/images/Web/image03.png)
+        > ![Blind SQL Injection으로 비밀번호 문자를 비교하는 실습 결과](/assets/images/Web/image03.png)
     - 파이썬 requests 모듈
         ```text
         pip install requests
@@ -244,8 +245,8 @@ categories: Hacking
 docker network create -d macvlan --subnet 192.168.10.0/24 --gateway 192.168.10.2 -o parent=ens32 docker-network
 docker compose up -d --build
 ```
-> ![IMAGE](/assets/images/Web/image04.png)
-> ![IMAGE](/assets/images/Web/image05.png)
+> ![Command Injection Docker 실습 환경 실행 화면](/assets/images/Web/image04.png)
+> ![Command Injection 취약점 실습 결과 화면](/assets/images/Web/image05.png)
 
 ## File Vulnerability
 - **File 업로드 취약점**: 악성 확장자를 갖는 파일을 업로드 하는 행위 (Webshell 등)

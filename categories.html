@@ -1,38 +1,20 @@
 ---
 layout: default
 title: "Category"
+description: "학습 기록을 카테고리별로 모아봅니다."
 permalink: /categories/
-date: 2026-05-28
 hide_likes: true
 ---
-
-<div style="max-width: 800px; margin: 0 auto; padding: 20px;">
-    <h1 style="border-bottom: 2px solid #334155; padding-bottom: 10px; color: #f8fafc;">전체 분류</h1>
-
-    <div style="margin-bottom: 40px; display: flex; flex-wrap: wrap; gap: 10px;">
-        {% for category in site.categories %}
-        <a href="#{{ category[0] }}" style="background: #1e293b; padding: 8px 15px; border-radius: 20px; color: #3b82f6; font-weight: bold; border: 1px solid #334155;">
-            {{ category[0] }} ({{ category[1].size }})
-        </a>
-        {% endfor %}
-    </div>
-
-    {% for category in site.categories %}
-    <h2 id="{{ category[0] }}" style="margin-top: 50px; color: #f8fafc;">
-        {{ category[0] }}
-    </h2>
-    
-    <ul style="list-style: none; padding-left: 0;">
-        {% for post in category[1] %}
-        <li style="margin-bottom: 10px; border-bottom: 1px dashed #334155; padding-bottom: 10px;">
-            <span style="color: #64748b; font-size: 0.9em; margin-right: 15px;">
-                {{ post.date | date: "%Y-%m-%d" }}
-            </span>
-            <a href="{{ post.url }}" style="color: #cbd5e1; font-size: 1.05em;">
-                {{ post.title }}
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+<nav class="category-nav" aria-label="분류 바로가기">
+    {% for category in site.categories %}<a href="#{{ category[0] | uri_escape }}">{{ category[0] }} <span>{{ category[1].size }}</span></a>{% endfor %}
+</nav>
+{% for category in site.categories %}
+<section class="category-section" aria-labelledby="{{ category[0] | escape }}">
+    <div class="section-heading"><h2 id="{{ category[0] | escape }}">{{ category[0] }}</h2><span>{{ category[1].size }} records</span></div>
+    <ul class="record-list">
+    {% for post in category[1] %}
+        <li class="record category-record"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%y.%m.%d" }}</time><a class="record-title" href="{{ post.url | relative_url }}">{{ post.title }}<span class="record-arrow" aria-hidden="true">↗</span></a></li>
     {% endfor %}
-</div>
+    </ul>
+</section>
+{% endfor %}

@@ -1,0 +1,28 @@
+.highlight {
+    color: #c9d1d9;
+    background: #0d1117;
+    border-radius: 6px;
+    padding: 16px;
+    overflow: auto;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+    font-size: 85%;
+    line-height: 1.45;
+    border: 1px solid #30363d;
+}
+.highlight pre { margin: 0; color: #c9d1d9; }
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf { color: #8b949e; font-style: italic; }
+.highlight .k, .highlight .kv { color: #ff7b72; font-weight: bold; }
+.highlight .n { color: #c9d1d9; }
+.highlight .s, .highlight .sa, .highlight .dl, .highlight .s2, .highlight .s1 { color: #a5d6ff; }
+.highlight .m, .highlight .mb, .highlight .mx, .highlight .mi, .highlight .mf { color: #79c0ff; }
+.highlight .nb, .highlight .nc, .highlight .nf, .highlight .fm { color: #d2a8ff; font-weight: bold; }
+.highlight .o, .highlight .ow { color: #79c0ff; font-weight: bold; }
+.highlight .nt { color: #7ee787; }
+.highlight .na { color: #79c0ff; }
+.highlight .err { color: #f0f6fc; background-color: #8e1519; }
+
+/* Set the code surface and its default text together, including unhighlighted fences. */
+.content pre { background: #0d1117; color: #c9d1d9; padding: 16px; border-radius: 6px; }
+.content .highlight pre { padding: 0; }
+.content pre code { background: transparent; color: #c9d1d9; }
+.highlight .highlight { padding: 0; border: 0; border-radius: 0; }

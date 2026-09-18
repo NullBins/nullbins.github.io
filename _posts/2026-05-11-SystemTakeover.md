@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "[System Takeover] Webshell, Command Injection 및 File 취약점 정리"
+description: "웹쉘, Command Injection, 파일 업로드·다운로드 취약점 등 웹 서버 장악으로 이어질 수 있는 취약점의 원리와 실습을 정리"
 date: 2026-05-11
 categories: Hacking
 ---
