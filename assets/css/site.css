@@ -3,12 +3,13 @@
 /* Editorial presentation only. Post data and URLs remain in Jekyll. */
 :root {
     color-scheme: light;
-    --paper: #F4F5F2;
-    --ink: #252925;
-    --muted: #68706A;
-    --line: #D9DDD7;
-    --accent: #52645A;
-    --wash: #E9ECE7;
+    --paper: #E6EEE7;
+    --ink: #232824;
+    --muted: #5F6A61;
+    --line: #C8D4CB;
+    --accent: #4F6758;
+    --wash: #DCE6DE;
+    --code: #D5E0D7;
     --serif: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --post-title-serif: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
