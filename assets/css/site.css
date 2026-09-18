@@ -3,12 +3,12 @@
 /* Editorial presentation only. Post data and URLs remain in Jekyll. */
 :root {
     color-scheme: light;
-    --paper: #E6EEE7;
-    --ink: #232824;
-    --muted: #5F6A61;
-    --line: #C8D4CB;
-    --accent: #4F6758;
-    --wash: #DCE6DE;
+    --paper: #F4F5F2;
+    --ink: #252925;
+    --muted: #68706A;
+    --line: #D9DDD7;
+    --accent: #52645A;
+    --wash: #E9ECE7;
     --serif: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --post-title-serif: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
@@ -95,7 +95,7 @@ main mark { background: #d5ddca; color: #20251f; }
 .content blockquote { margin: 25px 0; background: var(--wash); border-left: 2px solid var(--accent); padding: 20px 24px; color: #4d5648; }
 .content blockquote p:last-child { margin-bottom: 0; }
 .content hr { border: 0; border-top: 1px solid var(--line); margin: 45px 0; }
-.content :not(pre) > code { font: .88em/1.6 var(--mono); background: #e0e3d9; color: #384933; padding: 3px 6px; border-radius: 3px; }
+.content :not(pre) > code { font: .88em/1.6 var(--mono); background: #e0e3d9; color: #8B2F2F; padding: 3px 6px; border-radius: 3px; }
 .content pre { overflow: auto; max-width: 100%; tab-size: 4; }
 .content pre code { font: 13px/1.7 var(--mono); background: none; color: inherit; padding: 0; }
 .content table { display: block; overflow-x: auto; border-collapse: collapse; width: 100%; margin: 25px 0; font-size: 13px; }
