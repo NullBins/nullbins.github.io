@@ -40,9 +40,35 @@
 .theme-toggle:hover { background: var(--wash); }
 .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .theme-toggle [data-theme-icon] { font-size: 16px; line-height: 1; }
+/* Keep the desktop navigation beside the relocated toggle. */
+.site-header > nav { margin-left: auto; }
 @media (max-width: 600px) {
-    .site-header { flex-wrap: wrap; }
-    .site-header nav { flex-wrap: wrap; gap: 14px; }
+    .site-header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas: "logo toggle" "nav nav";
+        gap: 8px 12px;
+    }
+    .site-header > .logo { grid-area: logo; min-width: 0; }
+    .site-header > .theme-toggle {
+        grid-area: toggle;
+        min-height: 44px;
+        white-space: nowrap;
+    }
+    .site-header > nav {
+        grid-area: nav;
+        margin-left: 0;
+        min-width: 0;
+        flex-wrap: wrap;
+        gap: 4px 20px;
+    }
+    .site-header nav a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+    }
 }
 @media (pointer: coarse) {
     .theme-toggle { min-height: 44px; }
