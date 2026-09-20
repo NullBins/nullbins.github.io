@@ -1,0 +1,10 @@
+<div class="hero-shell" data-hero-shell>
+    <div class="hero-shell-bar"><span aria-hidden="true">~/nullbins</span><button class="hero-shell-pause" type="button" aria-label="터미널 애니메이션 일시정지" aria-pressed="false" hidden>일시정지</button></div>
+    <div class="hero-shell-command" aria-hidden="true"><span class="hero-shell-prompt">$</span> <span class="hero-shell-l">l</span><span class="hero-shell-s">s</span><span class="hero-shell-cursor hero-shell-first">█</span></div>
+    <nav class="hero-shell-output" aria-label="터미널 카테고리 목록">
+        {% for category in site.categories %}
+        <a href="{{ '/categories/' | relative_url }}#{{ category[0] | uri_escape }}">{{ category[0] | escape }}<span aria-hidden="true">/</span></a>
+        {% endfor %}
+    </nav>
+    <div class="hero-shell-next" aria-hidden="true"><span class="hero-shell-prompt">$</span> <span class="hero-shell-cursor">█</span></div>
+</div>
