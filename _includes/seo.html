@@ -5,7 +5,48 @@
 {% endif %}
 {% assign seo_description = page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 %}
 {% assign seo_url = page.url | absolute_url %}
-{% assign seo_image = page.image | default: '/assets/images/og-image.png' | absolute_url %}
+{% comment %}
+  Share image priority: front matter image, first post image, site fallback.
+  Read rendered HTML so ordinary Markdown images work without a plugin.
+{% endcomment %}
+{% assign seo_image = page.image | default: '' %}
+{% if seo_image == '' and page.collection == 'posts' %}
+  {% assign seo_body = content %}
+  {% if seo_body == nil or seo_body == '' %}
+    {% assign seo_body = page.content | markdownify %}
+  {% endif %}
+  {% assign seo_image_tags = seo_body | split: '<img ' %}
+  {% for seo_image_fragment in seo_image_tags offset:1 %}
+    {% assign seo_image_tag = seo_image_fragment | split: '>' | first | replace: '
+', ' ' | prepend: ' ' %}
+    {% assign seo_candidate = '' %}
+    {% if seo_image_tag contains ' src="' %}
+      {% assign seo_candidate = seo_image_tag | split: ' src="' | last | split: '"' | first %}
+    {% elsif seo_image_tag contains " src='" %}
+      {% assign seo_candidate = seo_image_tag | split: " src='" | last | split: "'" | first %}
+    {% endif %}
+    {% assign seo_candidate = seo_candidate | strip %}
+    {% if seo_candidate != '' %}
+      {% unless seo_candidate contains 'data:' or seo_candidate contains 'blob:' %}
+        {% assign seo_image = seo_candidate %}
+        {% break %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% assign seo_image = seo_image | default: '/assets/images/og-image.png' | replace: '&amp;', '&' %}
+{% assign seo_image_start = seo_image | slice: 0, 1 %}
+{% unless seo_image contains '://' or seo_image_start == '/' %}
+  {% assign seo_page_last = page.url | slice: -1, 1 %}
+  {% if seo_page_last == '/' %}
+    {% assign seo_image_base = page.url %}
+  {% else %}
+    {% assign seo_image_base = page.url | split: '/' | pop | join: '/' | append: '/' %}
+  {% endif %}
+  {% assign seo_image = seo_image_base | append: seo_image %}
+{% endunless %}
+{% assign seo_image = seo_image | absolute_url %}
+{% assign seo_image_alt = page.image_alt | default: seo_title %}
 <title>{% if page.title and page.title != 'Home' %}{{ seo_title | escape }} | {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
 <meta name="description" content="{{ seo_description | escape }}">
 <link rel="canonical" href="{{ seo_url }}">
@@ -13,13 +54,14 @@
 <meta property="og:title" content="{{ seo_title | escape }}">
 <meta property="og:url" content="{{ seo_url }}">
 <meta property="og:description" content="{{ seo_description | escape }}">
-<meta property="og:image" content="{{ seo_image }}">
-<meta property="og:image:alt" content="{{ site.title | escape }} 이미지">
+<meta property="og:image" content="{{ seo_image | escape }}">
+<meta property="og:image:alt" content="{{ seo_image_alt | escape }}">
 <meta property="og:type" content="{% if page.date %}article{% else %}website{% endif %}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ seo_title | escape }}">
 <meta name="twitter:description" content="{{ seo_description | escape }}">
-<meta name="twitter:image" content="{{ seo_image }}">
+<meta name="twitter:image" content="{{ seo_image | escape }}">
+<meta name="twitter:image:alt" content="{{ seo_image_alt | escape }}">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
