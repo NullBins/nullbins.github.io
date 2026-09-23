@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
     {% include theme.html %}
+    <link rel="stylesheet" href="{{ '/assets/css/mermaid.css' | relative_url }}">
+    <script defer src="{{ '/assets/js/mermaid-init.js' | relative_url }}"></script>
     {% if page.collection == 'posts' %}
     <script defer src="{{ '/assets/js/toc.js' | relative_url }}"></script>
     {% endif %}

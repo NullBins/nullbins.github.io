@@ -1,0 +1,34 @@
+/* Scoped to Mermaid output; existing post/code styles are unchanged. */
+.content .post-mermaid {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  margin: 24px 0;
+  padding: 16px;
+  border: 1px solid var(--line, #c8d4cb);
+  border-radius: 6px;
+  box-sizing: border-box;
+  line-height: normal;
+  background: var(--paper, #e6eee7);
+}
+.content .post-mermaid svg {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+}
+.content .post-mermaid:focus-visible {
+  outline: 2px solid var(--accent, #4f6758);
+  outline-offset: 3px;
+}
+.content .post-mermaid-status {
+  font-size: 13px;
+  color: var(--muted, #5f6a61);
+}
+.content .post-mermaid[hidden],
+.content .post-mermaid-status[hidden],
+.content pre[hidden],
+.content .highlighter-rouge[hidden] { display: none !important; }
+@media (max-width: 760px) {
+  .content .post-mermaid { padding: 12px; }
+}
