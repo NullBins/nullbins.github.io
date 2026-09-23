@@ -32,3 +32,10 @@
 @media (max-width: 760px) {
   .content .post-mermaid { padding: 12px; }
 }
+/* Hide source before JavaScript/CDN loading; reveal only on failure. */
+.content pre:has(> code.language-mermaid:not([data-mermaid-failed])),
+.content .highlighter-rouge:has(code.language-mermaid:not([data-mermaid-failed])),
+.content .language-mermaid.highlighter-rouge:not(:has(code[data-mermaid-failed])),
+.content .language-mermaid pre:not(:has(code[data-mermaid-failed])) {
+  display: none;
+}

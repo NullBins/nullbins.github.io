@@ -20,7 +20,7 @@
     message.setAttribute('role', 'status');
     message.textContent = '다이어그램을 불러오는 중입니다…';
     original.after(output, message);
-    return { source: code.textContent, original, output, message };
+    return { source: code.textContent, code, original, output, message };
   });
   try {
     const { default: mermaid } = await import(
@@ -59,10 +59,12 @@
                 graphic.style.width = Math.ceil(width) + 'px';
                 graphic.style.maxWidth = 'none';
               }
+              entry.code.removeAttribute('data-mermaid-failed');
               entry.original.hidden = true;
               entry.output.hidden = false;
               entry.message.hidden = true;
             } catch (error) {
+              entry.code.setAttribute('data-mermaid-failed', '');
               entry.original.hidden = false;
               entry.output.hidden = true;
               entry.message.hidden = false;
@@ -79,6 +81,10 @@
     await render();
   } catch (error) {
     entries.forEach(entry => {
+      entry.code.setAttribute('data-mermaid-failed', '');
+      entry.original.hidden = false;
+      entry.output.hidden = true;
+      entry.message.hidden = false;
       entry.message.textContent = '다이어그램을 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.';
     });
     console.error('Mermaid loading:', error);
