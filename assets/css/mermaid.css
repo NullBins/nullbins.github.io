@@ -39,3 +39,12 @@
 .content .language-mermaid pre:not(:has(code[data-mermaid-failed])) {
   display: none;
 }
+/* Custom classDef palettes stay pastel in dark mode.
+   Keep their labels dark; do not recolor clusters or default dark nodes. */
+[data-theme="dark"] .content .post-mermaid svg
+:is(.node.metadata, .node.userdata, .node.links, .node.freed, .node.ctrl, .node.host, .node.router)
+:is(.label, .nodeLabel, text, tspan, foreignObject, div, span, p) {
+  color: #111827 !important;
+  fill: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
