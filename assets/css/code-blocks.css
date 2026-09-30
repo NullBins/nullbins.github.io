@@ -1,0 +1,130 @@
+/* Code palette follows the existing data-theme setting. */
+.content .code-panel {
+  --code-bg: #e2e8e1;
+  --code-text: #263b30;
+  --code-border: #becbbf;
+  --code-badge-bg: #cedbcb;
+  --code-badge-text: #35583e;
+  --code-muted: #586b5d;
+  --code-comment: #586b5d;
+  --code-keyword: #b51e48;
+  --code-string: #08723c;
+  --code-number: #075ec4;
+  --code-function: #7826bd;
+  --code-variable: #9a4700;
+  --code-error: #a32f3f;
+  --code-error-bg: #f9e0df;
+  --code-added: #08723c;
+  --code-selection: #c3d5bf;
+  --code-focus: #497a54;
+  --code-font: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+  --code-size: 14px;
+  --code-leading: 1.8;
+  margin: 24px 0;
+  border: 1px solid var(--code-border);
+  border-radius: 12px;
+  background: var(--code-bg);
+  color: var(--code-text);
+  overflow: hidden;
+  max-width: 100%;
+  min-width: 0;
+  color-scheme: light;
+}
+[data-theme="dark"] .content .code-panel {
+  --code-bg: #141816;
+  --code-text: #e0e5e1;
+  --code-border: #2d3530;
+  --code-badge-bg: #28322c;
+  --code-badge-text: #b5c9b9;
+  --code-muted: #96a49b;
+  --code-comment: #9ba99f;
+  --code-keyword: #ff6387;
+  --code-string: #8fe66c;
+  --code-number: #62bdff;
+  --code-function: #c18aff;
+  --code-variable: #ffb347;
+  --code-error: #ffb5b8;
+  --code-error-bg: #503136;
+  --code-added: #8fe66c;
+  --code-selection: #35433a;
+  --code-focus: #a6bfae;
+  color-scheme: dark;
+}
+.content .code-panel-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 12px 4px;
+}
+.content .code-language {
+  padding: 2px 9px;
+  border-radius: 8px;
+  background: var(--code-badge-bg);
+  color: var(--code-badge-text);
+  font: 600 12px/1.8 var(--code-font);
+}
+.content .code-panel-body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding-bottom: 16px;
+}
+.content .code-line-numbers {
+  padding: 0 14px 0 16px;
+  border-right: 1px solid var(--code-border);
+  text-align: right;
+  color: var(--code-muted);
+  font: 500 var(--code-size)/var(--code-leading) var(--code-font);
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+.content .code-line-numbers > span { display: block; }
+.document-page .content .code-panel pre,
+.content .code-panel pre {
+  margin: 0;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--code-text);
+  min-width: 0;
+  max-width: 100%;
+  overflow: auto;
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+  tab-size: 4;
+  font: 500 var(--code-size)/var(--code-leading) var(--code-font);
+  font-variant-ligatures: none;
+  text-align: left;
+}
+.content .code-panel pre code {
+  display: block;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  white-space: inherit;
+}
+.content .code-panel code span {
+  font-style: normal;
+  font-weight: inherit;
+}
+.content .code-panel :is(.c,.c1,.cm,.cs,.ch,.cd) { color: var(--code-comment); }
+.content .code-panel :is(.k,.kc,.kd,.kn,.kp,.kr,.kt,.kv,.cp) { color: var(--code-keyword); font-weight: 600; }
+.content .code-panel :is(.s,.s1,.s2,.sa,.sb,.sc,.sd,.se,.sh,.si,.sr,.ss,.sx,.dl,.cpf) { color: var(--code-string); }
+.content .code-panel :is(.m,.mb,.mf,.mh,.mi,.il,.mo,.mx) { color: var(--code-number); }
+.content .code-panel :is(.nf,.fm,.nb,.nc,.nn,.nd) { color: var(--code-function); font-weight: 600; }
+.content .code-panel :is(.na,.nv,.vc,.vg,.vi,.vm) { color: var(--code-variable); }
+.content .code-panel :is(.o,.ow,.p,.n,.nx) { color: var(--code-text); }
+.content .code-panel .nt { color: var(--code-keyword); }
+.content .code-panel .err { color: var(--code-error); background: var(--code-error-bg); }
+.content .code-panel .gd { color: var(--code-error); }
+.content .code-panel .gi { color: var(--code-added); }
+.content .code-panel ::selection { background: var(--code-selection); color: var(--code-text); }
+.content .code-panel pre:focus-visible { outline: 2px solid var(--code-focus); outline-offset: -2px; }
+@media (max-width: 760px) {
+  .content .code-panel { --code-size: 13px; border-radius: 9px; }
+  .content .code-line-numbers { padding-inline: 10px; }
+  .document-page .content .code-panel pre { padding-inline: 12px; }
+}
